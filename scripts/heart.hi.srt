@@ -1,0 +1,427 @@
+1
+00:00:00,350 --> 00:00:04,042
+इस वीडियो में हम समझेंगे Human Heart and Circulation।
+
+2
+00:00:04,042 --> 00:00:08,026
+आपके पैर की एक cell तक oxygen कैसे पहुँचती है?
+
+3
+00:00:08,026 --> 00:00:12,324
+यह जानने के लिए हम एक red blood cell के साथ यात्रा करेंगे।
+
+4
+00:00:12,324 --> 00:00:17,041
+रास्ते में heart, lungs और blood vessels का काम देखेंगे।
+
+5
+00:00:18,308 --> 00:00:20,701
+Heart एक muscular organ है।
+
+6
+00:00:20,701 --> 00:00:24,774
+यह chest में lungs के बीच, थोड़ा बाईं ओर होता है।
+
+7
+00:00:24,774 --> 00:00:28,749
+इसकी pumping से blood पूरे शरीर में घूमता है।
+
+8
+00:00:28,749 --> 00:00:36,143
+Blood cells तक oxygen और nutrients पहुँचाता है, और carbon dioxide जैसे waste को हटाने
+
+9
+00:00:36,143 --> 00:00:37,236
+में मदद करता है।
+
+10
+00:00:38,600 --> 00:00:40,866
+आइए heart को अंदर से देखें।
+
+11
+00:00:40,866 --> 00:00:45,925
+ऊपर के दो chambers atria हैं और नीचे के दो ventricles।
+
+12
+00:00:45,925 --> 00:00:50,594
+इस सामने वाले view में anatomical right बाईं ओर दिखाई देता है।
+
+13
+00:00:50,594 --> 00:00:57,225
+चार chambers हैं, right atrium, right ventricle, left atrium और left ventricle।
+
+14
+00:00:58,600 --> 00:01:02,820
+Right और left sides के बीच muscular partition को septum कहते हैं।
+
+15
+00:01:02,820 --> 00:01:09,041
+सामान्य heart में यह oxygen-rich और oxygen-poor blood को अलग रखता है।
+
+16
+00:01:09,041 --> 00:01:11,903
+Atria blood receive करते हैं।
+
+17
+00:01:11,903 --> 00:01:14,998
+Ventricles blood को बाहर pump करते हैं।
+
+18
+00:01:14,998 --> 00:01:17,695
+अब अपनी red blood cell का रास्ता देखें।
+
+19
+00:01:18,975 --> 00:01:25,929
+Body की cells को oxygen देने के बाद blood में oxygen कम और carbon dioxide अधिक होती है।
+
+20
+00:01:25,929 --> 00:01:31,017
+यह superior और inferior vena cava से right atrium में आता है।
+
+21
+00:01:31,017 --> 00:01:34,055
+Blue रंग कम oxygen की पहचान है।
+
+22
+00:01:34,055 --> 00:01:37,200
+असल में यह blood भी गहरा लाल होता है।
+
+23
+00:01:38,517 --> 00:01:43,752
+Right atrium से blood tricuspid valve के रास्ते right ventricle में जाता है।
+
+24
+00:01:43,752 --> 00:01:50,305
+Ventricle के contraction से pressure बढ़ता है और tricuspid valve बंद हो जाता है।
+
+25
+00:01:50,305 --> 00:01:54,105
+इससे blood atrium में वापस नहीं लौटता।
+
+26
+00:01:54,105 --> 00:01:57,406
+Valve एक दिशा में flow बनाए रखता है।
+
+27
+00:01:58,725 --> 00:02:04,068
+Right ventricle blood को pulmonary valve से pulmonary artery में pump करता है।
+
+28
+00:02:04,068 --> 00:02:07,271
+यह artery दोनों lungs तक जाती है।
+
+29
+00:02:07,271 --> 00:02:12,437
+याद रखिए, artery की पहचान oxygen की मात्रा से नहीं होती।
+
+30
+00:02:12,437 --> 00:02:17,165
+Artery वह vessel है जो blood को heart से दूर ले जाती है।
+
+31
+00:02:18,475 --> 00:02:24,159
+Lungs में capillaries, alveoli नाम के छोटे air sacs के आसपास होती हैं।
+
+32
+00:02:24,159 --> 00:02:29,931
+पतली walls के पार oxygen, alveoli से blood में diffuse करती है।
+
+33
+00:02:29,931 --> 00:02:36,475
+Carbon dioxide blood से alveoli में जाती है और साँस छोड़ने पर बाहर निकलती है।
+
+34
+00:02:37,767 --> 00:02:40,941
+Red blood cells में haemoglobin protein होता है।
+
+35
+00:02:40,941 --> 00:02:44,642
+अधिकांश oxygen इसी से जुड़कर यात्रा करती है।
+
+36
+00:02:44,642 --> 00:02:52,456
+Cells का बीच से पतला biconcave shape surface area बढ़ाता है और संकरी capillaries से निकलने
+
+37
+00:02:52,456 --> 00:02:53,501
+में मदद करता है।
+
+38
+00:02:53,501 --> 00:02:57,144
+हमारी red blood cell अब oxygen लेकर लौट रही है।
+
+39
+00:02:58,475 --> 00:03:02,890
+Oxygen-rich blood pulmonary veins से left atrium में लौटता है।
+
+40
+00:03:02,890 --> 00:03:07,704
+इसलिए veins की पहचान भी oxygen की मात्रा से नहीं होती।
+
+41
+00:03:07,704 --> 00:03:10,850
+Veins blood को heart की तरफ लाती हैं।
+
+42
+00:03:10,850 --> 00:03:18,301
+Pulmonary veins में oxygen अधिक, जबकि शरीर से लौटने वाली ज्यादातर veins में कम होती है।
+
+43
+00:03:19,558 --> 00:03:25,956
+Left atrium से blood mitral, या bicuspid valve के रास्ते left ventricle में जाता है।
+
+44
+00:03:25,956 --> 00:03:30,683
+इसकी muscular wall, right ventricle से अधिक मोटी होती है।
+
+45
+00:03:30,683 --> 00:03:37,373
+इसे blood पूरे शरीर तक पर्याप्त pressure से पहुँचाना होता है, इसलिए अधिक force की ज़रूरत
+
+46
+00:03:37,373 --> 00:03:37,901
+होती है।
+
+47
+00:03:39,225 --> 00:03:41,140
+Left ventricle contract करता है।
+
+48
+00:03:41,140 --> 00:03:44,831
+Blood aortic valve से aorta में निकलता है।
+
+49
+00:03:44,831 --> 00:03:48,806
+Aorta की branches पूरे शरीर तक blood पहुँचाती हैं।
+
+50
+00:03:48,806 --> 00:03:51,941
+Heart muscle को भी oxygen चाहिए।
+
+51
+00:03:51,941 --> 00:03:55,985
+उसकी supply के लिए aorta से coronary arteries निकलती हैं।
+
+52
+00:03:57,308 --> 00:03:58,724
+पूरी यात्रा देखें।
+
+53
+00:03:58,724 --> 00:04:03,813
+Heart से lungs और वापस heart, यह pulmonary circulation है।
+
+54
+00:04:03,813 --> 00:04:09,243
+Heart से body tissues और वापस heart, यह systemic circulation है।
+
+55
+00:04:09,243 --> 00:04:13,501
+एक complete circuit में blood heart से दो बार गुजरता है।
+
+56
+00:04:13,501 --> 00:04:15,700
+इसी को double circulation कहते हैं।
+
+57
+00:04:17,017 --> 00:04:23,160
+चार मुख्य heart valves हैं, tricuspid, pulmonary, mitral और aortic।
+
+58
+00:04:23,160 --> 00:04:26,529
+ये pressure difference से खुलते और बंद होते हैं।
+
+59
+00:04:26,529 --> 00:04:28,698
+Pumping heart muscle करता है।
+
+60
+00:04:28,698 --> 00:04:34,235
+Valves का काम backward flow रोककर blood को सही दिशा में बनाए रखना है।
+
+61
+00:04:35,517 --> 00:04:37,841
+Heart relax करके blood से भरता है।
+
+62
+00:04:37,841 --> 00:04:41,836
+Atria का contraction ventricles की filling पूरी करता है।
+
+63
+00:04:41,836 --> 00:04:45,840
+फिर ventricles contract करके blood बाहर भेजते हैं।
+
+64
+00:04:45,840 --> 00:04:50,567
+Contraction को systole और relaxation को diastole कहते हैं।
+
+65
+00:04:50,567 --> 00:04:55,343
+धीमी गति में देखें, filling, pumping और फिर relaxation।
+
+66
+00:04:56,600 --> 00:05:02,763
+Lub और dub मुख्य रूप से valves बंद होने की vibrations से आती हैं।
+
+67
+00:05:02,763 --> 00:05:07,852
+पहली आवाज़ tricuspid और mitral valves के बंद होने से जुड़ी है।
+
+68
+00:05:07,852 --> 00:05:13,350
+दूसरी आवाज़ aortic और pulmonary valves के बंद होने से जुड़ी है।
+
+69
+00:05:13,350 --> 00:05:16,378
+यह क्रम हर heartbeat में दोहराता है।
+
+70
+00:05:17,683 --> 00:05:21,190
+Right atrium में एस ए node natural pacemaker है।
+
+71
+00:05:21,190 --> 00:05:24,794
+उसका electrical signal atria में फैलता है।
+
+72
+00:05:24,794 --> 00:05:29,736
+ए वी node पर थोड़े delay के बाद signal ventricles तक पहुँचता है।
+
+73
+00:05:29,736 --> 00:05:36,250
+इस coordination से atria पहले और ventricles बाद में contract करते हैं।
+
+74
+00:05:37,517 --> 00:05:43,963
+Arteries की walls मोटी, muscular और elastic होती हैं, क्योंकि इनमें pressure अधिक होता
+
+75
+00:05:43,963 --> 00:05:44,197
+है।
+
+76
+00:05:44,197 --> 00:05:49,002
+Veins में pressure कम और walls अपेक्षाकृत पतली होती हैं।
+
+77
+00:05:49,002 --> 00:05:54,052
+कई veins में valves होते हैं, जो blood को पीछे बहने से रोकते हैं।
+
+78
+00:05:55,350 --> 00:05:59,394
+Arteries, arterioles और फिर capillaries में बँटती हैं।
+
+79
+00:05:59,394 --> 00:06:04,687
+Capillaries की wall मुख्यतः एक endothelial cell layer की होती है।
+
+80
+00:06:04,687 --> 00:06:08,496
+यहाँ oxygen और nutrients tissues तक पहुँचते हैं।
+
+81
+00:06:08,496 --> 00:06:12,325
+Carbon dioxide और दूसरे waste blood में आते हैं।
+
+82
+00:06:12,325 --> 00:06:15,128
+पतली wall exchange को आसान बनाती है।
+
+83
+00:06:16,433 --> 00:06:19,236
+Oxygen को blood से tissue में जाते देखिए।
+
+84
+00:06:19,236 --> 00:06:25,995
+Cells इसे cellular respiration में इस्तेमाल करती हैं, जिससे nutrients की energy उपयोगी
+
+85
+00:06:25,995 --> 00:06:26,942
+रूप में मिलती है।
+
+86
+00:06:26,942 --> 00:06:29,961
+Carbon dioxide की दिशा उलटी है।
+
+87
+00:06:29,961 --> 00:06:36,240
+अलग substances अपने gradients और transport mechanisms के अनुसार exchange होते हैं।
+
+88
+00:06:37,517 --> 00:06:42,908
+Tissues के बीच जमा अतिरिक्त fluid, lymphatic vessels collect करती हैं।
+
+89
+00:06:42,908 --> 00:06:44,851
+इसे lymph कहते हैं।
+
+90
+00:06:44,851 --> 00:06:49,393
+यह आगे veins से blood circulation में लौटता है।
+
+91
+00:06:49,393 --> 00:06:56,709
+Lymph fluid balance, intestine से absorbed fats के transport और immune defence में मदद
+
+92
+00:06:56,709 --> 00:06:57,294
+करती है।
+
+93
+00:06:58,600 --> 00:07:00,280
+Blood में कई components हैं।
+
+94
+00:07:00,280 --> 00:07:04,021
+Liquid plasma dissolved substances transport करता है।
+
+95
+00:07:04,021 --> 00:07:07,615
+Red blood cells अधिकांश oxygen ले जाती हैं।
+
+96
+00:07:07,615 --> 00:07:10,896
+White blood cells defence में भाग लेती हैं।
+
+97
+00:07:10,896 --> 00:07:14,706
+Platelets damaged vessel पर clot बनने में मदद करती हैं।
+
+98
+00:07:14,706 --> 00:07:18,378
+साथ मिलकर ये transport और protection करते हैं।
+
+99
+00:07:19,683 --> 00:07:25,016
+Double circulation से lungs और body के लिए अलग pressure बनाए रखा जा सकता है।
+
+100
+00:07:25,016 --> 00:07:32,448
+Lungs की नाजुक capillaries के लिए कम pressure, और पूरे शरीर के लिए अधिक pressure उपयोगी
+
+101
+00:07:32,448 --> 00:07:32,702
+है।
+
+102
+00:07:32,702 --> 00:07:38,279
+दोनों तरह के blood का separation efficient oxygen delivery में मदद करता है।
+
+103
+00:07:39,600 --> 00:07:40,469
+यात्रा दोहराएँ।
+
+104
+00:07:40,469 --> 00:07:47,345
+Body से vena cava, right atrium, tricuspid valve, right ventricle, pulmonary artery और
+
+105
+00:07:47,345 --> 00:07:47,824
+lungs।
+
+106
+00:07:47,824 --> 00:07:54,094
+फिर pulmonary veins, left atrium, mitral valve, left ventricle और aorta से body।
+
+107
+00:07:54,094 --> 00:07:59,456
+अब आप समझ गए कि heart और blood vessels मिलकर हर cell तक उसकी ज़रूरतें कैसे पहुँचाते हैं।

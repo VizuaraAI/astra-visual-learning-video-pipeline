@@ -1,0 +1,5 @@
+modal>=1.0,<2
+requests>=2.32,<3
+Pillow==11.3.0
+numpy>=2,<3
+yt-dlp>=2026.8

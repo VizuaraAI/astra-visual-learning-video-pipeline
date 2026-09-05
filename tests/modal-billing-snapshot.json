@@ -1,0 +1,20 @@
+{
+  "fetched_utc": "2026-09-05T09:14:56.239432+00:00",
+  "complete_intervals_only": true,
+  "total_usd": "0.89786051",
+  "rows": [
+    {
+      "object_id": "ap-O5BZDszAvBGXxHaP9alFNg",
+      "description": "vl-execu-20260905",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 08:00:00+00:00",
+      "cost": "0.89786051",
+      "cost_by_resource": {
+        "Memory": "0.05060562",
+        "CPU": "0.07700217",
+        "L40S": "0.77025271"
+      },
+      "tags": {}
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "dna": {
+    "chunks": 1,
+    "frames": 48,
+    "failed": 0,
+    "estimated_usd": 0.32698951548473354,
+    "elapsed_seconds": 519.0968940258026
+  },
+  "cell": {
+    "chunks": 1,
+    "frames": 48,
+    "failed": 0,
+    "estimated_usd": 0.2927512258167648,
+    "elapsed_seconds": 464.7435004711151
+  },
+  "heart": {
+    "chunks": 1,
+    "frames": 48,
+    "failed": 0,
+    "estimated_usd": 0.25901421129764557,
+    "elapsed_seconds": 411.18588280677795
+  }
+}

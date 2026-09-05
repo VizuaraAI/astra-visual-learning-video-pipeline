@@ -1,0 +1,15 @@
+{
+  "stem": "cell_044_000000_000048",
+  "chapter": "cell",
+  "shot": 44,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 462.13248586654663,
+  "elapsed_seconds": 464.7435004711151,
+  "estimated_usd": 0.2927512258167648,
+  "samples": 48,
+  "bytes": 1200647,
+  "sha256": "72eba656a4344e2e8df764f6e72120d874a45e54e7fed24146681e5e99a479a8",
+  "status": "complete"
+}

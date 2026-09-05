@@ -1,0 +1,16 @@
+{
+  "heart": {
+    "chunks": 1,
+    "frames": 48,
+    "failed": 0,
+    "estimated_usd": 0.14283697841911316,
+    "elapsed_seconds": 314.12073016166687
+  },
+  "dna": {
+    "chunks": 1,
+    "frames": 48,
+    "failed": 0,
+    "estimated_usd": 0.0952232318070221,
+    "elapsed_seconds": 209.41069626808167
+  }
+}

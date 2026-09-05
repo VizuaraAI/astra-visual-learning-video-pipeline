@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.blend1
+cache/
+renders/
+audio/
+*.mp4
+*.wav
+*.mp3
+secrets*
+!tests/**/*.mp4
+!tests/**/*.mp3

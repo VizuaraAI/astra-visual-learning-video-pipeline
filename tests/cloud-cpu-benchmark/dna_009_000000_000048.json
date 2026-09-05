@@ -1,0 +1,17 @@
+{
+  "stem": "dna_009_000000_000048",
+  "chapter": "dna",
+  "shot": 9,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 206.62988018989563,
+  "elapsed_seconds": 209.41069626808167,
+  "estimated_usd": 0.0952232318070221,
+  "gpu": "CPU (32 cores)",
+  "rate_per_second": 0.00045472,
+  "samples": 48,
+  "bytes": 632360,
+  "sha256": "0c8f0a49041ba086a6ba8efbfb844183a6b04f1ce9c94bc5c015e3345f857dad",
+  "status": "complete"
+}

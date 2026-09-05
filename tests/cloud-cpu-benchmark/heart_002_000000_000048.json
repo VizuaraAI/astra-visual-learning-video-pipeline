@@ -1,0 +1,17 @@
+{
+  "stem": "heart_002_000000_000048",
+  "chapter": "heart",
+  "shot": 2,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 311.26841163635254,
+  "elapsed_seconds": 314.12073016166687,
+  "estimated_usd": 0.14283697841911316,
+  "gpu": "CPU (32 cores)",
+  "rate_per_second": 0.00045472,
+  "samples": 48,
+  "bytes": 681032,
+  "sha256": "5361d296b1859d14a8fb5ab3c77f51025d5d4c1119e85e05163bed2082d5d525",
+  "status": "complete"
+}

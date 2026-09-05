@@ -1,0 +1,17 @@
+{
+  "stem": "cell_044_000000_000012",
+  "chapter": "cell",
+  "shot": 44,
+  "start": 0,
+  "end": 12,
+  "frames": 12,
+  "render_seconds": 405.52996587753296,
+  "elapsed_seconds": 407.4972574710846,
+  "estimated_usd": 0.18529715291725157,
+  "gpu": "CPU (32 cores)",
+  "rate_per_second": 0.00045472,
+  "samples": 48,
+  "bytes": 378672,
+  "sha256": "d4c60eebc97d2e54d6d9f748ea69c7f0c7838e804c0a5a0afa073b9179dcbb70",
+  "status": "complete"
+}

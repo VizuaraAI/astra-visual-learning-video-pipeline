@@ -1,0 +1,15 @@
+{
+  "stem": "dna_009_000000_000048",
+  "chapter": "dna",
+  "shot": 9,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 517.1306729316711,
+  "elapsed_seconds": 519.0968940258026,
+  "estimated_usd": 0.32698951548473354,
+  "samples": 48,
+  "bytes": 617334,
+  "sha256": "13de60549f56bac63aa8a5954a55f9476265663d95d3a04c69d3240654d63b64",
+  "status": "complete"
+}

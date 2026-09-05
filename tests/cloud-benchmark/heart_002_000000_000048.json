@@ -1,0 +1,15 @@
+{
+  "stem": "heart_002_000000_000048",
+  "chapter": "heart",
+  "shot": 2,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 409.2500379085541,
+  "elapsed_seconds": 411.18588280677795,
+  "estimated_usd": 0.25901421129764557,
+  "samples": 48,
+  "bytes": 677869,
+  "sha256": "1ee77d3a3a845df1473bdfa42f4d4b40f16248a32e4ad9a0d2037aead56151ca",
+  "status": "complete"
+}
