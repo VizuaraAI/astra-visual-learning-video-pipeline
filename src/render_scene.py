@@ -147,6 +147,7 @@ def animate(st,f):
         t=(sec/period+phase)%1;q=t*(len(pts)-1);j=min(int(q),len(pts)-2)
         ob.location=pts[j].lerp(pts[j+1],q-j)
         ob.rotation_euler=(.35*sin(sec+phase*6),.45*cos(sec*.7+phase*4),sec*.16+phase*6)
+    for ob in st.get('valve_markers',[]):ob.rotation_euler=(0,0,sec*.16)
     contraction,av_open,semilunar_open=cardiac_cycle(sec)
     for ob in st['heartbeat']:
         pulse=1-.035*contraction;ob.scale=(pulse,pulse,1-.02*contraction)

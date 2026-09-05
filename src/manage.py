@@ -15,7 +15,7 @@ def upload(audio=None):
                 if p.exists():b.put_file(str(p),'/audio/'+p.name)
     print('Uploaded manifests'+(' and audio' if audio else ''))
 
-def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),worker='gpu',samples=48):
+def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),worker='gpu',samples=48,shots_filter=None):
     cache.mkdir(parents=True,exist_ok=True);path=cache/(run+'-calls.json')
     calls=json.loads(path.read_text()) if path.exists() else [];existing={(c['chapter'],c['shot'],c['start'],c['end']) for c in calls}
     f=modal.Function.from_name(APP,'render_chunk_cpu' if worker=='cpu' else 'render_chunk')
@@ -23,6 +23,7 @@ def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),work
     for name in chapters:
         m=json.loads((ROOT/'storyboards'/f'{name}.json').read_text());total=sum(s['frames'] for s in m['shots'])
         shots=[m['shots'][{'cell':44,'heart':2,'dna':9}[name]]] if benchmark else m['shots']
+        if shots_filter is not None:shots=[s for s in shots if s['index'] in shots_filter]
         nchunks=sum(math.ceil(s['frames']/chunk) for s in shots)
         # Allow scene construction even for a short tail; allocate remaining time by frame count.
         pass_seconds=135/RATE
@@ -62,9 +63,9 @@ def status(run,cache,download=False):
     (cache/'status.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['upload','dispatch','status','assemble','download-master']);p.add_argument('--run',default='v1');p.add_argument('--chapter');p.add_argument('--chunk',type=int,default=240);p.add_argument('--benchmark',action='store_true');p.add_argument('--cache',default='cache');p.add_argument('--audio');p.add_argument('--download',action='store_true');p.add_argument('--worker',choices=['gpu','cpu'],default='gpu');p.add_argument('--samples',type=int,default=48);a=p.parse_args();cache=Path(a.cache)
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['upload','dispatch','status','assemble','download-master']);p.add_argument('--run',default='v1');p.add_argument('--chapter');p.add_argument('--chunk',type=int,default=240);p.add_argument('--benchmark',action='store_true');p.add_argument('--cache',default='cache');p.add_argument('--audio');p.add_argument('--download',action='store_true');p.add_argument('--worker',choices=['gpu','cpu'],default='gpu');p.add_argument('--samples',type=int,default=48);p.add_argument('--shots',type=int,nargs='+');a=p.parse_args();cache=Path(a.cache)
     if a.action=='upload':upload(a.audio)
-    elif a.action=='dispatch':dispatch(a.run,a.chapter,a.chunk,a.benchmark,cache,a.worker,a.samples)
+    elif a.action=='dispatch':dispatch(a.run,a.chapter,a.chunk,a.benchmark,cache,a.worker,a.samples,a.shots)
     elif a.action=='status':status(a.run,cache,a.download)
     elif a.action=='assemble':
         f=modal.Function.from_name(APP,'assemble');calls=[]

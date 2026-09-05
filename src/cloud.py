@@ -92,3 +92,26 @@ def assemble(chapter:str,run_id:str='v1'):
     subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-f','concat','-safe','0','-i',str(listing),'-i',f'/data/audio/{chapter}.wav','-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','192k','-ar','48000','-movflags','+faststart','-t',str(sum(s['frames'] for s in manifest['shots'])/24),str(master)],check=True)
     result=dict(chapter=chapter,elapsed_seconds=time.time()-t0,bytes=master.stat().st_size,sha256=hashlib.sha256(master.read_bytes()).hexdigest())
     (out/(chapter+'.json')).write_text(json.dumps(result,indent=2));volume.commit();return result
+
+@app.function(image=image,cpu=2,memory=4096,timeout=1800,max_containers=1,scaledown_window=2,volumes={'/data':volume})
+def stage_repaired_chapter(chapter:str,base_run:str,repair_run:str,combined_run:str,replaced_shots:list[int]):
+    """Create a fresh, complete run from a base pass and explicitly replaced shots."""
+    import json,shutil
+    from pathlib import Path
+    volume.reload();manifest=json.loads((Path('/data/manifests')/(chapter+'.json')).read_text())
+    out=Path('/data')/combined_run/chapter;out.mkdir(parents=True,exist_ok=True)
+    records=[]
+    for shot in manifest['shots']:
+        selected=repair_run if shot['index'] in replaced_shots else base_run
+        base=Path('/data')/selected/chapter;cursor=0
+        for p in sorted(base.glob(shot['id']+'_*.json')):
+            if p.name.endswith('.failed.json'):continue
+            m=json.loads(p.read_text())
+            if m.get('status')!='complete':continue
+            if m['start']!=cursor:raise RuntimeError('Incomplete or overlapping source shot: '+shot['id'])
+            cursor=m['end'];m['source_run']=selected
+            for suffix in ['.mp4','.jpg']:
+                src=base/(m['stem']+suffix);shutil.copyfile(src,out/src.name)
+            (out/p.name).write_text(json.dumps(m,indent=2));records.append(m['stem'])
+        if cursor!=shot['frames']:raise RuntimeError('Incomplete source shot: '+shot['id'])
+    volume.commit();return dict(chapter=chapter,combined_run=combined_run,chunks=len(records),replaced_shots=replaced_shots)

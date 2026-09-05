@@ -2,7 +2,7 @@
 import argparse,dataclasses,datetime,json
 from pathlib import Path
 import modal
-NAMES={'vl-execu-20260905','vl-execu-20260905-prod','vl-execu-20260905-quality'}
+NAMES={'vl-execu-20260905','vl-execu-20260905-prod','vl-execu-20260905-quality','vl-execu-20260905-valve-fix'}
 
 def run(output,start,include_current=False):
     now=datetime.datetime.now(datetime.timezone.utc)

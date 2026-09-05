@@ -90,3 +90,21 @@ python src/compare.py --reference /path/to/owned-cell-reference.mp4 --master mas
 The complete comparison video uses the macOS `h264_videotoolbox` encoder. On another platform, replace that encoder with `libx264` and a suitable preset; the comparison sheets are portable. All comparison timestamps are explicitly listed in `src/compare.py`.
 
 The models are educational representations with deliberately expanded microscopic detail, shortened process times and nonliteral scale. The heart is a procedural anatomical schematic, not patient imaging. Molecular meshes are not atomic-coordinate reconstructions. Review the final deviations report for the exact extent of reference matching and scientific annotations. No claim of pixel-identical reconstruction is implied by a matching output duration.
+
+
+## Delivered valve-transit correction
+
+Final heart master `quality-final` reuses the 128-sample `quality-v2` pass except zero-based shots 5, 10 and 13. Those shots were rerendered as `valve-repair` using the final source in this repository. `stage_repaired_chapter` copies the chosen complete chunks into a fresh run and refuses gaps/overlaps. The final source can simply render the whole heart in one fresh run; the extra staging step is only needed to reproduce the incremental delivery workflow.
+
+```bash
+blender -b --factory-startup -t 2 --python tests/check_valve_transit.py
+# For an incremental correction of an existing quality-v2 run:
+export VL_APP=vl-execu-20260905-valve-fix
+export VL_VOLUME=vl-execu-20260905-quality-data
+export VL_GPU_WORKERS=12
+python -m modal deploy src/cloud.py
+python src/manage.py dispatch --run valve-repair --chapter heart --samples 128 --shots 5 10 13 --cache cache/repair/jobs
+python src/finalize_repair.py --cache cache/repair --base-cache cache/production --masters masters
+```
+
+The actual geometry test sampled ten seconds at 240 Hz and checked every marker intersecting a valve plane. The minimum valve opening during all 1,428 sampled intersections was 1.0 (fully open). See `tests/valve-transit-check.json`. Markers illustrate one-way transit; they are not a computational fluid-dynamics simulation.

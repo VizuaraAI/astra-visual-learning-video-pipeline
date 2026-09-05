@@ -1,0 +1,20 @@
+[
+  {
+    "shot": 5,
+    "transit_checks": 396,
+    "minimum_valve_opening": 1.0,
+    "passed": true
+  },
+  {
+    "shot": 10,
+    "transit_checks": 360,
+    "minimum_valve_opening": 1.0,
+    "passed": true
+  },
+  {
+    "shot": 13,
+    "transit_checks": 672,
+    "minimum_valve_opening": 1.0,
+    "passed": true
+  }
+]

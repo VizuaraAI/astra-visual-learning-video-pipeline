@@ -1,6 +1,7 @@
 """Original teaching models: anatomically oriented heart and blood-flow set pieces."""
 from geometry import *
 import random
+from cardiac_motion import crossing_phase
 R=random.Random(2323)
 
 def rbc_mesh(name,P,oxygen=True):
@@ -94,9 +95,14 @@ def heart(P,state,cut=False,flow=False):
         routes={4:[(-1.5,.4,3.3),(-1.35,.25,2),(-1,.05,1.1)],5:[(-1,.02,1.1),(-1,-.02,.36),(-.9,.02,-.65)],6:[(-.9,.02,-.65),(-.5,-.25,.3),(-.25,-.15,2.3),(-2.3,.5,2.65)],9:[(2.4,1.1,1.4),(1.6,.75,1.25),(.92,.35,1.1)],10:[(.92,.2,1.1),(.8,-.02,.36),(.72,.0,-.85)],11:[(.72,.0,-.85),(.7,.45,.55),(.35,.9,2.6),(1,.85,3.25),(1.75,1,1.6)]}
         pts=routes.get(state['shot']['index'],routes[11]);traj=curve_points(pts,100)
         tube('Highlighted blood route',traj,.045,P['cyan'],9)
-        for i in range(8):
+        av_route=state['shot']['index'] in [5,10]
+        count=3 if av_route else 8
+        crossing=min(range(len(traj)),key=lambda j:abs(traj[j].z-.36))/(len(traj)-1)
+        for i in range(count):
             o=rbc_mesh('Travelling red blood cell',P,state['shot']['index']>=9);o.scale=(.15,)*3
-            state['movers'].append((o,traj,i/8,6))
+            phase=crossing_phase(crossing,.75,count,i) if av_route else i/count
+            state['movers'].append((o,traj,phase,count/1.2 if av_route else 6))
+            if av_route:state.setdefault('valve_markers',[]).append(o)
 
 def alveoli(P,state):
     shell=material('Alveolar tissue',(.76,.29,.34),0,.42,.18,noise=.25)
@@ -178,9 +184,12 @@ def valve(P,state):
             rad=sqrt(v.co.x*v.co.x+v.co.y*v.co.y);u=max(0,min(1,(1-rad/1.65)/.94));ang=math.atan2(v.co.y,v.co.x)
             v.co=(1.65*(1-u*.18)*cos(ang),1.65*(1-u*.18)*sin(ang),-1.1*u)
         state.setdefault('valve_shapes',[]).append((key,'semilunar'))
+    traj=curve_points([(.2,.2,-2),(.2,.2,0),(.3,.2,2.4)])
+    crossing=min(range(len(traj)),key=lambda j:abs(traj[j].z))/(len(traj)-1)
     for i in range(8):
         o=rbc_mesh('Blood through valve',P);o.scale=(.24,)*3
-        state['movers'].append((o,curve_points([(.2,.2,-2),(.2,.2,0),(.3,.2,2.4)]),i/8,6))
+        state['movers'].append((o,traj,crossing_phase(crossing,.25,8,i),8/1.2))
+        state.setdefault('valve_markers',[]).append(o)
 
 def conduction(P,state):
     heart(P,state,cut=False)

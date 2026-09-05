@@ -7,3 +7,7 @@ def cardiac_cycle(seconds):
     semilunar = max(0.0, min(1.0, (wave - .05) * 3))
     atrioventricular = max(0.0, min(1.0, (-wave - .05) * 3))
     return contraction, atrioventricular, semilunar
+
+def crossing_phase(path_fraction, opening_phase, count, index):
+    """Space one marker crossing per beat, centered on the open valve."""
+    return path_fraction - opening_phase / count + index / count
