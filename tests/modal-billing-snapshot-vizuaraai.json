@@ -1,0 +1,47 @@
+{
+  "fetched_utc": "2026-09-05T10:42:59.113471+00:00",
+  "complete_intervals_only": false,
+  "total_usd": "40.49734696",
+  "rows": [
+    {
+      "object_id": "ap-O5BZDszAvBGXxHaP9alFNg",
+      "description": "vl-execu-20260905",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 08:00:00+00:00",
+      "cost": "0.89786051",
+      "cost_by_resource": {
+        "L40S": "0.77025271",
+        "Memory": "0.05060562",
+        "CPU": "0.07700217"
+      },
+      "tags": {}
+    },
+    {
+      "object_id": "ap-RvkiVA9OXXB5zfPoxrMqN8",
+      "description": "vl-execu-20260905-prod",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 09:00:00+00:00",
+      "cost": "27.86964079",
+      "cost_by_resource": {
+        "L40S": "5.46758419",
+        "A10G": "0.04644434",
+        "Memory": "1.88945790",
+        "CPU": "20.46615436"
+      },
+      "tags": {}
+    },
+    {
+      "object_id": "ap-RvkiVA9OXXB5zfPoxrMqN8",
+      "description": "vl-execu-20260905-prod",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 10:00:00+00:00",
+      "cost": "11.72984566",
+      "cost_by_resource": {
+        "L40S": "9.56465133",
+        "Memory": "0.42207649",
+        "CPU": "1.74311783"
+      },
+      "tags": {}
+    }
+  ]
+}

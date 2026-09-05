@@ -1,0 +1,34 @@
+{
+  "fetched_utc": "2026-09-05T10:44:59.725140+00:00",
+  "complete_intervals_only": false,
+  "total_usd": "18.83914739",
+  "rows": [
+    {
+      "object_id": "ap-6yrVsPnFI80T7kUqf3V1ol",
+      "description": "vl-execu-20260905-quality",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 10:00:00+00:00",
+      "cost": "17.45245942",
+      "cost_by_resource": {
+        "L40S": "5.43725147",
+        "Memory": "0.76634455",
+        "CPU": "1.15636210",
+        "A10G": "10.09250130"
+      },
+      "tags": {}
+    },
+    {
+      "object_id": "ap-FjZKW3ICDVwLCM8ZqPQNXf",
+      "description": "vl-execu-20260905-valve-fix",
+      "environment_name": "main",
+      "interval_start": "2026-09-05 10:00:00+00:00",
+      "cost": "1.38668797",
+      "cost_by_resource": {
+        "L40S": "1.27724907",
+        "Memory": "0.04303997",
+        "CPU": "0.06639893"
+      },
+      "tags": {}
+    }
+  ]
+}

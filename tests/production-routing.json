@@ -1,0 +1,33 @@
+{
+  "cell": {
+    "profile": "vizuaraai",
+    "app": "vl-execu-20260905-prod",
+    "volume": "vl-execu-20260905-data",
+    "run": "v1",
+    "samples": 48,
+    "frames": 21386
+  },
+  "dna": {
+    "profile": "rajatdandekar",
+    "app": "vl-execu-20260905-quality",
+    "volume": "vl-execu-20260905-quality-data",
+    "run": "quality-v2",
+    "samples": 128,
+    "frames": 11532
+  },
+  "heart": {
+    "profile": "rajatdandekar",
+    "app": "vl-execu-20260905-valve-fix",
+    "volume": "vl-execu-20260905-quality-data",
+    "run": "quality-final",
+    "base_run": "quality-v2",
+    "repair_run": "valve-repair",
+    "replaced_shots": [
+      5,
+      10,
+      13
+    ],
+    "samples": 128,
+    "frames": 11528
+  }
+}

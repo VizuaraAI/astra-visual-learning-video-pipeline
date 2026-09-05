@@ -31,12 +31,12 @@ def run(work,delivery):
     (ROOT/'tests/production-cost-records.json').write_text(json.dumps(report,indent=2))
     names={'cell':'The Fundamental Unit of Life','heart':'Human Heart and Circulation','dna':'DNA: From Gene to Protein'}
     rows=[]
-    for k,v in media.items():
-        d=v['duration'];rows.append(f'| {names[k]} | {int(d//60)}:{d%60:05.2f} | {v["expected_frames"]:,} | ${totals[k]["estimated_usd"]:.2f} |')
+    for k in ['cell','heart','dna']:
+        v=media[k];d=v['duration'];rows.append(f'| {names[k]} | {int(d//60)}:{d%60:05.2f} | {v["expected_frames"]:,} | ${totals[k]["estimated_usd"]:.2f} |')
     chars=sum(sum(v.values()) for v in speech.values())
     text='''# Delivery report
 
-Three masters were generated at native **1920×1080, 24 fps, H.264 with 48 kHz AAC narration**. No music is present. Automated checks passed for resolution, codecs, frame rate, exact frame count, duration, audio coverage/sample rate, full-file decoding and absence of sustained black frames. Timestamped contact sheets and the original/recreation comparison accompany the videos.
+Three masters were generated at native **1920×1080, 24 fps, H.264 with 48 kHz AAC narration**. No music was added. Automated checks passed for resolution, codecs, frame rate, exact frame count, duration, audio coverage/sample rate, full-file decoding and absence of sustained black frames. Timestamped contact sheets and the original/recreation comparison accompany the videos.
 
 | Video | Duration | Frames | Measured render estimate |
 |---|---:|---:|---:|
@@ -46,7 +46,7 @@ Three masters were generated at native **1920×1080, 24 fps, H.264 with 48 kHz A
 
 Total estimated worker resource cost with completed runtime records is **${sum(v['estimated_usd'] for v in totals.values()):.2f}**. This includes all retained benchmarks, the superseded partial CPU heart pass, recorded unsuccessful attempts and the final production passes. Estimates multiply each worker's measured runtime by the published GPU, CPU and memory rates. They are **not a verified Modal invoice**. Canceled in-flight workers may not have written completion metrics, so their usage is captured by the provider snapshots below rather than this runtime estimate. Build/startup time, brief container idling, final assembly, storage and account credits can also change the billed amount. The detailed ledger is in `visual-learning-pipeline/tests/production-cost-records.json`.
 
-The cell chapter was rendered in `vizuaraai`; the final heart and DNA chapters were rendered in the explicitly authorized `rajatdandekar` workspace. Its billing API confirmed an existing **$250 monthly plan charge** before rendering. That fixed plan charge is separate from this production's metered compute. The original app used 48 samples; the final originals use 128 samples with a stricter adaptive threshold. Superseded CPU outputs are excluded from the final masters. Three heart shots were then rerendered to align blood-cell transit with fully open valves; both the replaced chunks and the correction pass are counted in the cost audit.
+The cell chapter was rendered in `vizuaraai`; the final heart and DNA chapters were rendered in the explicitly authorized `rajatdandekar` workspace. Its billing API confirmed an existing **$250 monthly plan charge** before rendering. That fixed plan charge is separate from this production's metered compute. The cell pass used 48 samples; the final originals use 128 samples with a stricter adaptive threshold. Superseded CPU outputs are excluded from the final masters. Three heart shots were then rerendered to align blood-cell transit with fully open valves; both the replaced chunks and the correction pass are counted in the cost audit.
 
 ElevenLabs consumed **{chars:,} requested text characters** across both the discarded longer drafts and final scripts. The last subscription check reported zero current overage; existing plan credits were used. No per-request cash invoice was available. Reusing the bundled final FLAC tracks requires no new speech generation.
 
