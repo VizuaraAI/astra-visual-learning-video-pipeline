@@ -1,0 +1,6 @@
+{
+  "samples_checked": 2400,
+  "periodic": true,
+  "av_closed_during_contraction": true,
+  "no_simultaneous_valve_opening": true
+}

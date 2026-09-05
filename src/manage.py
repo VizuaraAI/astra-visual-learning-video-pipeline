@@ -1,9 +1,9 @@
 """Client-side production control. Credentials come only from Modal environment/config."""
-import json,argparse,time,math,hashlib
+import json,argparse,time,math,hashlib,os
 from pathlib import Path
 import modal
 ROOT=Path(__file__).resolve().parents[1]
-APP='vl-execu-20260905-prod';VOL='vl-execu-20260905-data';RATE=.00058596
+APP=os.environ.get('VL_APP','vl-execu-20260905-prod');VOL=os.environ.get('VL_VOLUME','vl-execu-20260905-data');RATE=.00058596
 
 def upload(audio=None):
     v=modal.Volume.from_name(VOL,create_if_missing=True)
@@ -15,7 +15,7 @@ def upload(audio=None):
                 if p.exists():b.put_file(str(p),'/audio/'+p.name)
     print('Uploaded manifests'+(' and audio' if audio else ''))
 
-def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),worker='gpu'):
+def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),worker='gpu',samples=48):
     cache.mkdir(parents=True,exist_ok=True);path=cache/(run+'-calls.json')
     calls=json.loads(path.read_text()) if path.exists() else [];existing={(c['chapter'],c['shot'],c['start'],c['end']) for c in calls}
     f=modal.Function.from_name(APP,'render_chunk_cpu' if worker=='cpu' else 'render_chunk')
@@ -34,9 +34,9 @@ def dispatch(run,chapter=None,chunk=240,benchmark=False,cache=Path('cache'),work
                 key=(name,shot['index'],st,en)
                 if key in existing:continue
                 # Reservations sum to at most USD 135/video, below the user's USD 150 cap.
-                maxseconds=900 if benchmark else min(2700,math.floor(startup_seconds+render_seconds*(en-st)/total))
-                fc=f.spawn(name,shot['index'],st,en,run,48,maxseconds)
-                calls.append(dict(chapter=name,shot=shot['index'],start=st,end=en,call_id=fc.object_id,max_seconds=maxseconds,reserved_usd=maxseconds*RATE,worker=worker))
+                maxseconds=900 if benchmark else min(5700 if samples>=128 else 2700,math.floor(startup_seconds+render_seconds*(en-st)/total))
+                fc=f.spawn(name,shot['index'],st,en,run,samples,maxseconds)
+                calls.append(dict(chapter=name,shot=shot['index'],start=st,end=en,call_id=fc.object_id,max_seconds=maxseconds,reserved_usd=maxseconds*RATE,worker=worker,samples=samples))
                 path.write_text(json.dumps(calls,indent=2));existing.add(key)
                 print('QUEUED '+name+' '+str(shot['index'])+' '+str(st)+' '+str(en),flush=True)
     print(json.dumps(dict(run=run,calls=len(calls),worst_case_reserved_usd=sum(c['reserved_usd'] for c in calls))))
@@ -62,9 +62,9 @@ def status(run,cache,download=False):
     (cache/'status.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('action',choices=['upload','dispatch','status','assemble','download-master']);p.add_argument('--run',default='v1');p.add_argument('--chapter');p.add_argument('--chunk',type=int,default=240);p.add_argument('--benchmark',action='store_true');p.add_argument('--cache',default='cache');p.add_argument('--audio');p.add_argument('--download',action='store_true');p.add_argument('--worker',choices=['gpu','cpu'],default='gpu');a=p.parse_args();cache=Path(a.cache)
+    p=argparse.ArgumentParser();p.add_argument('action',choices=['upload','dispatch','status','assemble','download-master']);p.add_argument('--run',default='v1');p.add_argument('--chapter');p.add_argument('--chunk',type=int,default=240);p.add_argument('--benchmark',action='store_true');p.add_argument('--cache',default='cache');p.add_argument('--audio');p.add_argument('--download',action='store_true');p.add_argument('--worker',choices=['gpu','cpu'],default='gpu');p.add_argument('--samples',type=int,default=48);a=p.parse_args();cache=Path(a.cache)
     if a.action=='upload':upload(a.audio)
-    elif a.action=='dispatch':dispatch(a.run,a.chapter,a.chunk,a.benchmark,cache,a.worker)
+    elif a.action=='dispatch':dispatch(a.run,a.chapter,a.chunk,a.benchmark,cache,a.worker,a.samples)
     elif a.action=='status':status(a.run,cache,a.download)
     elif a.action=='assemble':
         f=modal.Function.from_name(APP,'assemble');calls=[]

@@ -2,7 +2,7 @@
 
 ## Evidence
 
-Inspected both supplied MP4s, a 30-second overview of each, the complete cell video sampled every five seconds, its Hindi caption track, and its audio. Cell source: 891.083333 s / 24 fps / 1280×720. Chemistry source: 792.208333 s / 24 fps / 640×360. Published cell source: https://www.youtube.com/watch?v=n3x7gczAISE . Caption provenance: YouTube `hi-orig` JSON3 retrieved with yt-dlp. These are automatic captions and contain recognition errors; preserve the original audio for exact words and pauses.
+Inspected both supplied MP4s, a 30-second overview of each, the complete cell video sampled every five seconds, its Hindi caption track, and the decoded audio timing/signal. The environment did not support listening review. Cell source: 891.083333 s / 24 fps / 1280×720. Chemistry source: 792.208333 s / 24 fps / 640×360. Published cell source: https://www.youtube.com/watch?v=n3x7gczAISE . Caption provenance: YouTube `hi-orig` JSON3 retrieved with yt-dlp. These are automatic captions and contain recognition errors; preserve the original audio for exact words and pauses.
 
 ## House language
 
@@ -12,7 +12,7 @@ Objects occupy an almost black charcoal stage. Biology largely floats without a 
 
 The interface uses white sans-serif type, teal outlined skewed section tags, navy translucent pointed organelle labels, thin arrows, and red framed function panels. The gold diamond channel mark sits at the upper right. Labels are scene anchored in the organelle tour and screen anchored for definitions. Camera motion is mainly slow orbit, push, pull and pan. Objects open or peel apart to reveal structure; particles explain passage through a membrane. Cuts and fades introduce new concepts, while patient holds leave time to inspect.
 
-The narration is a female Hindi teaching voice with English science terms. There is no continuous music bed in the inspected passages. A silence detector at −40 dB with a 150 ms minimum finds 293 pauses in the cell master, median 0.310 s, totaling 290.886 s; this includes short internal pauses, longer visual holds and the ending. The original track will be reused for the recreation. Original chapters use Anika—Engaging Teacher, ElevenLabs multilingual v2, `hi`, with deliberate inter-shot holds and no music.
+The supplied brief identifies Anika as the closest narrator match; the caption text uses Hindi teaching language with English science terms. No music is added to this production. The recreation retains the source track unchanged. A silence detector at −40 dB with a 150 ms minimum finds 293 pauses in the cell master, median 0.310 s, totaling 290.886 s; this includes short internal pauses, longer visual holds and the ending. The original track will be reused for the recreation. Original chapters use Anika—Engaging Teacher, ElevenLabs multilingual v2, `hi`, with deliberate inter-shot holds and no music.
 
 ## Rebuild direction
 

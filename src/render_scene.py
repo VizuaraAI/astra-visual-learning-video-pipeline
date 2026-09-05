@@ -8,6 +8,7 @@ from geometry import *
 import assets as A
 import heart_assets as H
 import dna_assets as D
+from cardiac_motion import cardiac_cycle
 
 def reset():
     bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
@@ -83,7 +84,7 @@ def setup(shot,args):
     if hasattr(scene.cycles,'denoising_use_gpu'):scene.cycles.denoising_use_gpu=bool(args.gpu)
     scene.cycles.max_bounces=6;scene.cycles.diffuse_bounces=3;scene.cycles.glossy_bounces=3
     scene.cycles.transmission_bounces=5;scene.cycles.transparent_max_bounces=4
-    scene.cycles.adaptive_threshold=.045;scene.render.threads_mode='FIXED';scene.render.threads=args.threads
+    scene.cycles.adaptive_threshold=.02 if args.samples>=128 else .045;scene.render.threads_mode='FIXED';scene.render.threads=args.threads
     if args.gpu:
         pref=bpy.context.preferences.addons['cycles'].preferences
         pref.compute_device_type='CUDA';pref.get_devices()
@@ -146,14 +147,13 @@ def animate(st,f):
         t=(sec/period+phase)%1;q=t*(len(pts)-1);j=min(int(q),len(pts)-2)
         ob.location=pts[j].lerp(pts[j+1],q-j)
         ob.rotation_euler=(.35*sin(sec+phase*6),.45*cos(sec*.7+phase*4),sec*.16+phase*6)
+    contraction,av_open,semilunar_open=cardiac_cycle(sec)
     for ob in st['heartbeat']:
-        pulse=1-.035*max(0,sin(sec*2*pi*1.2))**5;ob.scale=(pulse,pulse,1-.02*(1-pulse)/.035)
+        pulse=1-.035*contraction;ob.scale=(pulse,pulse,1-.02*contraction)
     for ob,base in st['leaflets']:
         ob.location=base+Vector((0,0,.14*sin(sec*2*pi*.7)))
     for key,kind in st.get('valve_shapes',[]):
-        phase=(sec*.7)%1
-        opening=max(0,min(1,(math.sin(phase*2*pi)+.15)*2))
-        key.value=opening if kind=='semilunar' else 1-opening
+        key.value=semilunar_open if kind=='semilunar' else av_open
     if 'digest' in st:st['digest'].scale=(.8+.2*cos(sec*.45),)*3
     if 'coverslip' in st:st['coverslip'].location.z=.17+.3*(.5+.5*cos(min(1,u*2)*pi))
     if 'trna' in st:st['trna'].location.x=-.65+.13*sin(sec*.6)

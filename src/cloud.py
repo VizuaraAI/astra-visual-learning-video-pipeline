@@ -1,9 +1,9 @@
 """Durable Modal GPU render service. Deploy; invoke with Function.from_name().spawn()."""
-import modal
+import modal,os
 from pathlib import Path
 
-APP_NAME='vl-execu-20260905-prod'
-VOLUME_NAME='vl-execu-20260905-data'
+APP_NAME=os.environ.get('VL_APP','vl-execu-20260905-prod')
+VOLUME_NAME=os.environ.get('VL_VOLUME','vl-execu-20260905-data')
 ROOT=Path(__file__).resolve().parents[1]
 app=modal.App(APP_NAME)
 volume=modal.Volume.from_name(VOLUME_NAME,create_if_missing=True)
@@ -19,7 +19,7 @@ image=(modal.Image.debian_slim(python_version='3.11')
 # Modal resource prices verified 2026-09-05; estimates, not provider invoices.
 RATE_PER_SECOND=.000542+2*.0000131+8*.00000222
 
-@app.function(image=image,gpu=['L40S','A10','L4'],cpu=2,memory=8192,timeout=6000,max_containers=18,scaledown_window=2,volumes={'/data':volume})
+@app.function(image=image,gpu=['L40S','A10','L4'],cpu=2,memory=8192,timeout=6000,max_containers=int(os.environ.get('VL_GPU_WORKERS','18')),scaledown_window=2,volumes={'/data':volume})
 def render_chunk(chapter:str,shot_index:int,start:int,end:int,run_id:str='v1',samples:int=48,max_seconds:int=1800,use_gpu:bool=True,cpu_threads:int=2,resource_rate:float|None=None):
     import os,json,time,subprocess,tempfile,shutil,hashlib,sys
     from pathlib import Path

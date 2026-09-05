@@ -95,3 +95,14 @@
 - Gate waits for the completed 48-frame GPU benchmark, verifies MP4 checksum, 1080p/24fps/48frames and a nonblank representative frame, checks full-length projection <=$135, then dispatches all127cellGPUchunks into the existing v1 ledger. It cannot exceed the controller's $134.96 reservation. If it fails, read its log and handle the concrete issue; do not assume cell is dispatched.
 - Both original masters: all129calls have been dispatched successfully. 24CPUworkers active, early completed chunks saved with zero failures. Assembly/download observer remains active.
 - Important active processes: production monitor (work/production-monitor.log) and cell gate (work/cell-dispatch-gate.log). No paid subscription or other app settings were changed.
+
+
+## Additional workspace and final quality revision
+
+The user supplied and explicitly authorized profile `rajatdandekar`, now verified and active. The billing API confirmed a USD 250 plan fee and zero month-to-date compute before this production. One pre-existing idle app (`example-commands`) was present and was left untouched. New isolated app `vl-execu-20260905-quality` and volume `vl-execu-20260905-quality-data` are deployed with up to 32 GPU workers. No credentials are stored in this repository.
+
+The original workspace continues only the cell GPU pass (`v1`). Superseded heart/DNA CPU call cancellation was requested for the exact 129 IDs in the local dispatch ledger. Completed and canceled work must remain in the spend audit. A restarted observer downloads only the cell master, preventing old CPU outputs from overwriting the final originals.
+
+Quality revision `quality-v2` uses 128 Cycles samples and adaptive threshold 0.02 for heart and DNA. Corrected cardiac motion shares a single phase between contraction and valve opening. The final timings and narration are unchanged. Dedicated 48-frame quality benchmarks precede the full pass. Checkpoint frames for all 131 compositions and earlier cloud tests were already completed before this revision.
+
+After both quality benchmarks passed, the quality function autoscaler was raised from 32 to 48 GPU workers (min/buffer zero) to use the otherwise idle Team workspace. The source decorator remains configurable via `VL_GPU_WORKERS`; deployment defaults are documented.

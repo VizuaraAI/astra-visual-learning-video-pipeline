@@ -49,28 +49,36 @@ ffmpeg -i assets/narration/dna.flac cache/audio/dna.wav
 
 ## Cloud rendering
 
-Authenticate Modal using its standard environment variables or account configuration. Use workspace `vizuaraai`. The app and volume names are deliberately isolated from the other session: `vl-execu-20260905-prod` and `vl-execu-20260905-data`. Never stop unrelated apps. Do not commit credentials.
+Authenticate Modal using its standard environment variables or named account configuration. The delivered cell pass used workspace `vizuaraai`, app `vl-execu-20260905-prod`, volume `vl-execu-20260905-data`. The final heart and DNA pass used the user's newly authorized `rajatdandekar` profile, app `vl-execu-20260905-quality`, volume `vl-execu-20260905-quality-data`. App/volume selection is explicit. Never stop unrelated apps. Do not commit credentials.
 
 ```bash
+# Select your authorized profile first; these names create isolated resources.
+export VL_APP=vl-execu-20260905-quality
+export VL_VOLUME=vl-execu-20260905-quality-data
+export VL_GPU_WORKERS=48
 python -m modal deploy src/cloud.py
 python src/manage.py upload --audio cache/audio
-python src/manage.py dispatch --run bench --benchmark --cache cache/bench
-python src/manage.py status --run bench --cache cache/bench --download
-# Inspect the actual cloud frames and timings before the full pass.
-python src/manage.py dispatch --run v1 --chapter heart --worker cpu --chunk 240 --cache cache/jobs
-python src/manage.py dispatch --run v1 --chapter dna --worker cpu --chunk 240 --cache cache/jobs
-python src/manage.py dispatch --run v1 --chapter cell --worker gpu --chunk 240 --cache cache/jobs
-python src/manage.py status --run v1 --cache cache/status
-python src/monitor_production.py --run v1 --cache cache/production --masters masters
+python src/manage.py dispatch --run bench-quality --chapter heart --benchmark --samples 128 --cache cache/bench
+python src/manage.py dispatch --run bench-quality --chapter dna --benchmark --samples 128 --cache cache/bench
+python src/manage.py status --run bench-quality --cache cache/bench --download
+# Inspect actual cloud frames and timings before the full pass.
+python src/manage.py dispatch --run quality-v2 --chapter heart --samples 128 --chunk 240 --cache cache/jobs
+python src/manage.py dispatch --run quality-v2 --chapter dna --samples 128 --chunk 240 --cache cache/jobs
+python src/monitor_production.py --run quality-v2 --cache cache/production --masters masters --chapters heart dna
+# A fresh cell rerender can use the same app and its own run.
+python src/manage.py dispatch --run cell-rerender --chapter cell --samples 48 --chunk 240 --cache cache/jobs
+python src/monitor_production.py --run cell-rerender --cache cache/cell-production --masters masters --chapters cell
 ```
 
 These calls use a deployed function and `spawn()`, so jobs survive a disconnected client. The cloud worker writes an encoded chunk, a representative actual frame and a JSON completion record, then commits the volume. Progress comes from those records rather than a process log. Assembly refuses missing, overlapping or incomplete frame ranges. Completed chunks are idempotent; each chunk has a SHA-256 checksum. Never mix artifacts from different source revisions in the same run directory.
 
-Production uses native 1920×1080 at 24 fps, Cycles CUDA, 48 samples with adaptive sampling, GPU-accelerated OpenImageDenoise, no GPU compositor, H.264 CRF 16 and AAC 192 kb/s. L40S is preferred, with A10 and L4 fallbacks. Each worker reserves two CPU cores and 8 GiB RAM, and records the assigned GPU and its rate. Only temporary PNG frames occupy worker scratch storage; encoded chunks persist on the volume. The GPU function is capped at 18 containers and queues behind other jobs. Heart and DNA production use the CPU function (32 CPU cores, 16 GiB, CPU OpenImageDenoise); a production autoscaler override permits 24 CPU workers. The CPU decorator defaults to eight workers for a smaller rerun.
+Production uses native 1920×1080 at 24 fps, Cycles CUDA, adaptive sampling, GPU OpenImageDenoise, no GPU compositor, H.264 CRF 16 and AAC 192 kb/s. The retained cell pass uses 48 samples at a 0.045 adaptive threshold. The final heart and DNA pass uses 128 samples at a stricter 0.02 threshold. L40S is preferred, with A10 and L4 fallbacks. Each worker reserves two CPU cores and 8 GiB RAM, and records its assigned GPU and rate. Temporary PNGs occupy worker scratch space; encoded chunks persist on the volume. The initial app permits 18 GPU workers; the final quality app was raised to 48. CPU test and partial heart production records remain in the cost audit, but that superseded CPU work is not used in the final masters.
+
+All cardiac valve shape keys and myocardial contraction share a 72 beats/minute phase. AV valves close during contraction and the semilunar/AV opening windows do not overlap; invariant checks are retained in `tests/cardiac-timing-check.json`. Motion is a teaching schematic rather than a pressure/flow simulation.
 
 ## Budget and limitations
 
-The dispatch controller conservatively reserves at most USD 135 per video for one complete rendering pass, leaving headroom within the brief's approximately USD 150 per video limit. For the delivered edit with 240-frame chunks, the reservations are $134.96 (cell), $79.57 (heart) and $78.03 (DNA). These are ceilings rather than predicted bills. A lower-priced fallback receives more wall time within the same dollar reservation. The controller will not automatically rerender failed work. Review measured costs and reservations before repairs. Reports estimate resource cost from measured runtime and published rates; the provider invoice remains the authority for actual billing, cold starts and account-specific credits.
+The dispatch controller conservatively reserves at most USD 135 per video for one complete rendering pass, leaving headroom within the brief's approximately USD 150 per video limit. The original cell reservation is $134.96; each 128-sample quality pass reserves at most $135. The user subsequently authorized freely using GPUs on the additional $250-plan workspace. This plan fee is distinct from metered compute. These are ceilings rather than predicted bills. A lower-priced fallback receives more wall time within the same dollar reservation. The controller will not automatically rerender failed work. Review measured costs and reservations before repairs. Reports estimate resource cost from measured runtime and published rates; the provider invoice remains the authority for actual billing, cold starts and account-specific credits.
 
 ## Verify and compare
 

@@ -1,0 +1,17 @@
+{
+  "stem": "heart_002_000000_000048",
+  "chapter": "heart",
+  "shot": 2,
+  "start": 0,
+  "end": 48,
+  "frames": 48,
+  "render_seconds": 151.15775680541992,
+  "elapsed_seconds": 153.10440635681152,
+  "estimated_usd": 0.053580418048629765,
+  "gpu": "NVIDIA A10",
+  "rate_per_second": 0.00034996,
+  "samples": 128,
+  "bytes": 650692,
+  "sha256": "d284be9929d92ebc7269515ea08296b94092882d14324147919d597b9d812d2c",
+  "status": "complete"
+}

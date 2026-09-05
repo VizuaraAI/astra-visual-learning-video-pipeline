@@ -5,7 +5,7 @@ from PIL import Image,ImageStat
 import modal
 from manage import dispatch,VOL,ROOT
 
-def run(chapter,benchmark,cache,jobs,production='v1',worker='gpu'):
+def run(chapter,benchmark,cache,jobs,production='v1',worker='gpu',samples=48):
     cache.mkdir(parents=True,exist_ok=True);v=modal.Volume.from_name(VOL)
     index={'cell':44,'heart':2,'dna':9}[chapter];stem=f'{chapter}_{index:03d}_000000_000048'
     remote=f'/{benchmark}/{chapter}/{stem}'
@@ -33,8 +33,8 @@ def run(chapter,benchmark,cache,jobs,production='v1',worker='gpu'):
         (cache/'benchmark-gate.json').write_text(json.dumps(gate,indent=2))
         if not gate['accepted']:raise RuntimeError(f'Projection ${projection:.2f} exceeds this pass budget')
         print('BENCHMARK ACCEPTED',gate,flush=True)
-        dispatch(production,chapter,240,False,jobs,worker)
+        dispatch(production,chapter,240,False,jobs,worker,samples)
         return
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--chapter',required=True);p.add_argument('--benchmark',required=True);p.add_argument('--cache',type=Path,required=True);p.add_argument('--jobs',type=Path,required=True);p.add_argument('--production',default='v1');p.add_argument('--worker',default='gpu',choices=['cpu','gpu']);a=p.parse_args();run(a.chapter,a.benchmark,a.cache,a.jobs,a.production,a.worker)
+    p=argparse.ArgumentParser();p.add_argument('--chapter',required=True);p.add_argument('--benchmark',required=True);p.add_argument('--cache',type=Path,required=True);p.add_argument('--jobs',type=Path,required=True);p.add_argument('--production',default='v1');p.add_argument('--worker',default='gpu',choices=['cpu','gpu']);p.add_argument('--samples',type=int,default=48);a=p.parse_args();run(a.chapter,a.benchmark,a.cache,a.jobs,a.production,a.worker,a.samples)

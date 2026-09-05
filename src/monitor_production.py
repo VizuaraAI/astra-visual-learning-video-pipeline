@@ -4,10 +4,10 @@ import argparse,json,time,os
 import modal
 from manage import status,APP,VOL,ROOT
 
-def observe(run,cache,masters):
+def observe(run,cache,masters,chapters=None):
     cache.mkdir(parents=True,exist_ok=True);masters.mkdir(parents=True,exist_ok=True)
     ledgerpath=cache/'assembly-calls.json';ledger=json.loads(ledgerpath.read_text()) if ledgerpath.exists() else {}
-    expected={name:sum(s['frames'] for s in json.loads((ROOT/'storyboards'/f'{name}.json').read_text())['shots']) for name in ['cell','heart','dna']}
+    expected={name:sum(s['frames'] for s in json.loads((ROOT/'storyboards'/f'{name}.json').read_text())['shots']) for name in (chapters or ['cell','heart','dna'])}
     v=modal.Volume.from_name(VOL);f=modal.Function.from_name(APP,'assemble')
     while True:
         status(run,cache/'metrics')
@@ -32,8 +32,8 @@ def observe(run,cache,masters):
                     tmp.replace(out);print('MASTER DOWNLOADED',name,out.stat().st_size,flush=True)
                 state['downloaded'].append(name)
         (cache/'production-state.json').write_text(json.dumps(state,indent=2))
-        if len(state['downloaded'])==3:print('ALL MASTERS READY',flush=True);return
+        if len(state['downloaded'])==len(expected):print('ALL MASTERS READY',flush=True);return
         time.sleep(60)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--run',default='v1');p.add_argument('--cache',type=Path,required=True);p.add_argument('--masters',type=Path,required=True);a=p.parse_args();observe(a.run,a.cache,a.masters)
+    p=argparse.ArgumentParser();p.add_argument('--run',default='v1');p.add_argument('--cache',type=Path,required=True);p.add_argument('--masters',type=Path,required=True);p.add_argument('--chapters',nargs='+');a=p.parse_args();observe(a.run,a.cache,a.masters,a.chapters)

@@ -1,6 +1,6 @@
 """Verify delivered media and build timestamped contact sheets from encoded masters."""
 from pathlib import Path
-import argparse,json,subprocess,tempfile,math,hashlib
+import argparse,json,subprocess,tempfile,math,hashlib,re
 from PIL import Image,ImageDraw,ImageFont
 ROOT=Path(__file__).resolve().parents[1]
 def file_hash(path):
@@ -17,9 +17,12 @@ def run(masters,out):
     for chapter in ['cell','heart','dna']:
         m=json.loads((ROOT/'storyboards'/f'{chapter}.json').read_text());p=masters/(chapter+'.mp4');info=probe(p)
         v=next(s for s in info['streams'] if s['codec_type']=='video');a=next(s for s in info['streams'] if s['codec_type']=='audio');expected=sum(s['frames'] for s in m['shots'])
-        checks=dict(h264=v['codec_name']=='h264',aac=a['codec_name']=='aac',resolution=(v['width'],v['height'])==(1920,1080),fps=v['r_frame_rate']=='24/1',frame_count=int(v.get('nb_frames',-1))==expected,duration=abs(float(info['format']['duration'])-expected/24)<.12,audio_sample_rate=int(a['sample_rate'])==48000)
+        decode=subprocess.run(['ffmpeg','-nostdin','-hide_banner','-v','info','-i',str(p),'-vf','blackdetect=d=0.5:pix_th=0.05:pic_th=0.995','-f','null','-'],capture_output=True,text=True)
+        black=[line.strip() for line in decode.stderr.splitlines() if 'black_start:' in line]
+        errors=[line for line in decode.stderr.splitlines() if re.search(r'error while decoding|invalid data found|corrupt decoded frame',line,re.I)]
+        checks=dict(h264=v['codec_name']=='h264',aac=a['codec_name']=='aac',resolution=(v['width'],v['height'])==(1920,1080),fps=v['r_frame_rate']=='24/1',frame_count=int(v.get('nb_frames',-1))==expected,duration=abs(float(info['format']['duration'])-expected/24)<.12,audio_sample_rate=int(a['sample_rate'])==48000,audio_duration=abs(float(a.get('duration',0))-expected/24)<.15,full_decode=decode.returncode==0 and not errors,no_sustained_black_frames=not black)
         if not all(checks.values()):raise RuntimeError({chapter:checks})
-        reports[chapter]=dict(checks=checks,expected_frames=expected,duration=expected/24,bytes=p.stat().st_size,sha256=file_hash(p),streams=info['streams'])
+        reports[chapter]=dict(checks=checks,expected_frames=expected,duration=expected/24,bytes=p.stat().st_size,sha256=file_hash(p),streams=info['streams'],black_intervals=black,decode_errors=errors)
         indices=list(range(len(m['shots']))) if chapter!='cell' else [round(i*(len(m['shots'])-1)/23) for i in range(24)]
         sheet=Image.new('RGB',(1944,6*398+95),(7,17,24));d=ImageDraw.Draw(sheet);d.text((26,23),m['title']+' | MASTER CONTACT SHEET',font=bold,fill='white')
         with tempfile.TemporaryDirectory() as tmp:
